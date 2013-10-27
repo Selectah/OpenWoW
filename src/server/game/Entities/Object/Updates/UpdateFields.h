@@ -102,8 +102,8 @@ enum EUnitFields
     UNIT_FIELD_CHANNEL_OBJECT                        = OBJECT_END + 0x0012, // Size: 2, Type: LONG, Flags: PUBLIC
     UNIT_CHANNEL_SPELL                               = OBJECT_END + 0x0014, // Size: 1, Type: INT, Flags: PUBLIC
     UNIT_FILED_SUMMONED_BY_HOME_REALM                = OBJECT_END + 0x0015, // Size: 1, Type: INT, Flags: PUBLIC
-    UNIT_FIELD_SEX                                   = OBJECT_END + 0x0016, // Size: 1, Type: INT, Flags: PUBLIC
-    UNIT_FIELD_BYTES_0                               = OBJECT_END + 0x0017, // Size: 1, Type: BYTES, Flags: PUBLIC UNIT_FIELD_DISPLAY_POWER ?
+    UNIT_FIELD_BYTES_0                               = OBJECT_END + 0x0016, // Size: 1, Type: BYTES, Flags: PUBLIC
+    UNIT_FIELD_DISPLAY_POWER                         = OBJECT_END + 0x0017, // Size: 1, Type: INT, Flags: PUBLIC
     UNIT_OVERRIDE_DISPLAY_POWER_ID                   = OBJECT_END + 0x0018, // Size: 1, Type: Flags PUBLIC
     UNIT_FIELD_HEALTH                                = OBJECT_END + 0x0019, // Size: 1, Type: INT, Flags: PUBLIC
     UNIT_FIELD_POWER1                                = OBJECT_END + 0x001A, // Size: 1, Type: INT, Flags: PUBLIC
@@ -149,7 +149,7 @@ enum EUnitFields
     UNIT_MOD_HASTE_REGEN                             = OBJECT_END + 0x004D,
     UNIT_CREATED_BY_SPELL                            = OBJECT_END + 0x004E, // Size: 1, Type: INT, Flags: PUBLIC
     UNIT_NPC_FLAGS                                   = OBJECT_END + 0x004F, // Size: 1, Type: INT, Flags: DYNAMIC
-    UNIT_NPC_EMOTESTATE                              = OBJECT_END + 0x0051, // Size: 2, Type: INT, Flags: PUBLIC
+    UNIT_NPC_EMOTESTATE                              = OBJECT_END + 0x0050, // Size: 2, Type: INT, Flags: PUBLIC
     UNIT_FIELD_STAT0                                 = OBJECT_END + 0x0052, // Size: 1, Type: INT, Flags: PRIVATE, OWNER
     UNIT_FIELD_STAT1                                 = OBJECT_END + 0x0053, // Size: 1, Type: INT, Flags: PRIVATE, OWNER
     UNIT_FIELD_STAT2                                 = OBJECT_END + 0x0054, // Size: 1, Type: INT, Flags: PRIVATE, OWNER
