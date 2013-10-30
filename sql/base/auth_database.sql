@@ -61571,7 +61571,7 @@ CREATE TABLE `realmlist` (
 -- ----------------------------
 -- Records of realmlist
 -- ----------------------------
-INSERT INTO realmlist VALUES ('1', 'OpenEmu 5.4.0', '127.0.0.1', '127.0.0.1', '255.255.255.0', '8085', '0', '0', '1', '0', '0', '17399');
+INSERT INTO realmlist VALUES ('1', 'OpenEmu 5.4.0', '127.0.0.1', '127.0.0.1', '255.255.255.0', '8085', '0', '0', '1', '0', '0', '17538');
 
 -- ----------------------------
 -- Table structure for `realm_classes`

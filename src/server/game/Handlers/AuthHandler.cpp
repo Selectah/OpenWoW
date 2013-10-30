@@ -34,29 +34,27 @@ void WorldSession::SendAuthResponse(uint8 code, bool queued, uint32 queuePos)
     packet.WriteBit(queued);
     packet.WriteBit(code == AUTH_OK);
 
+    if (queued)
+    {
+        packet.WriteBit(1);
+        //packet << uint32(queuePos);                             // Queue position
+
+        //packet.FlushBits();
+    }
+
     if (code == AUTH_OK)
     {
+	packet.WriteBit(0);
         packet.WriteBits(0, 21);
-        packet.WriteBit(0);
+	packet.WriteBits(0, 21);
         packet.WriteBits(result->GetRowCount(), 23);
         packet.WriteBit(0);
         packet.WriteBit(0);
-
-        packet.WriteBits(0, 21);
         packet.WriteBit(0);
-        packet.WriteBits(result2->GetRowCount(), 23);
-        packet.WriteBit(0);
-
-        packet.FlushBits();
+        packet.WriteBits(result2->GetRowCount(), 23);	
     }
-
-    if (queued)
-    {
-        packet.WriteBit(0);
-        packet << uint32(queuePos);                             // Queue position
-
-        packet.FlushBits();
-    }
+    TC_LOG_ERROR(LOG_FILTER_GENERAL, "Auth.");
+    packet.FlushBits();
     
     if (code == AUTH_OK)
     {
