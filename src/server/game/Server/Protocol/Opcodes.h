@@ -359,7 +359,6 @@ enum Opcodes
     CMSG_MOVE_CHNG_TRANSPORT                          = 0x1361, // 17538
     CMSG_MOVE_ENABLE_SWIM_TO_FLY_TRANS_ACK            = 0x0000,
     CMSG_MOVE_FALL_RESET                              = 0x12C1, // 17538
-	CMSG_MOVE_SET_FLY                                 = 0x1769, // 17538 ??
     CMSG_MOVE_FEATHER_FALL_ACK                        = 0x3110,
     CMSG_MOVE_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK      = 0x310E,
     CMSG_MOVE_FORCE_FLIGHT_SPEED_CHANGE_ACK           = 0x7314,
@@ -550,7 +549,7 @@ enum Opcodes
     CMSG_TELEPORT_TO_UNIT                             = 0x4206,
     CMSG_TEXT_EMOTE                                   = 0x1444, 
     CMSG_TIME_ADJUSTMENT_RESPONSE                     = 0x215C,
-    CMSG_TIME_SYNC_RESP                               = 0x11E6, // 17538
+    CMSG_TIME_SYNC_RESP                               = 0x0203, // 17399 
     CMSG_TIME_SYNC_RESP_FAILED                        = 0x215A,
     CMSG_TOGGLE_PVP                                   = 0x6815,
     CMSG_TOTEM_DESTROYED                              = 0x4207,
@@ -602,7 +601,7 @@ enum Opcodes
     MSG_MOVE_JUMP                                     = 0x07C9, // 17538
     MSG_MOVE_SET_ALL_SPEED_CHEAT                      = 0x0000,
     MSG_MOVE_SET_COLLISION_HEIGHT                     = 0x0000,
-    MSG_MOVE_SET_FACING                               = 0x1368, // 17538
+    MSG_MOVE_SET_FACING                               = 0x0B3A, // 17399
     MSG_MOVE_SET_FLIGHT_SPEED_CHEAT                   = 0x0000,
     MSG_MOVE_SET_PITCH                                = 0x0261, // 17538
     MSG_MOVE_SET_RAW_POSITION_ACK                     = 0x0000,
@@ -625,7 +624,7 @@ enum Opcodes
     MSG_MOVE_START_SWIM                               = 0x0FC8, // 17538
     MSG_MOVE_START_TURN_LEFT                          = 0x0760, // 17538
     MSG_MOVE_START_TURN_RIGHT                         = 0x17C9, // 17538
-    MSG_MOVE_STOP                                     = 0x0649, // 17538
+    MSG_MOVE_STOP                                     = 0x0A06, // 17538
     MSG_MOVE_STOP_ASCEND                              = 0x1268, // 17538
     MSG_MOVE_STOP_PITCH                               = 0x1A48, // 17538
     MSG_MOVE_STOP_STRAFE                              = 0x12C9, // 17538
@@ -1132,7 +1131,6 @@ enum Opcodes
     SMSG_NOTIFY_DANCE                                 = 0x4904,
     SMSG_NOTIFY_DEST_LOC_SPELL_CAST                   = 0x6204,
     SMSG_NPC_TEXT_UPDATE                              = 0x101F, // 17538
-	SMSG_NPC_WONT_TALK                                = 0x0000,
     SMSG_OFFER_PETITION_ERROR                         = 0x2716,
     SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA         = 0x4D34,
     SMSG_OPEN_CONTAINER                               = 0x4714,
