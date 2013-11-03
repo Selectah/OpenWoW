@@ -16,7 +16,10 @@ OpenWoW540
 
 This emulator is based on a version of TrinityCore
 
-OpenWoW540 is an emulator for World of Warcraft Version 5.4.1, build Support 17538 - Mist of Pandaria.
+OpenWoW541 is an emulator for World of Warcraft 
+
+Master 5.4.0 -- Version 5.4.0, build Support 17399 - Mist of Pandaria.
+Branch 5.4.1 -- Version 5.4.1, build Support 17538 - Mist of Pandaria.
 
 Our emulator is currently in development. It is also completely open source.
 You can help by providing updates via either end or through our forum.
@@ -31,6 +34,4 @@ us by contributing in this way.
 ----------------
 
 Join : Http://www.OpenEmulator.com/
-
-Contact us (Skype only) : OpenEmulator
 
