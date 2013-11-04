@@ -12,6 +12,9 @@ OpenWoW540
  Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
  
  https://github.com/TrinityCore/TrinityCore
+ 
+ 
+Want to join ? Shure, just visit [THIS](http://openemulator.com/wow/index.php/forum/21-join-our-team/) and make Thread !
 
 
 This emulator is based on a version of TrinityCore
