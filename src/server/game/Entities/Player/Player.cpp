@@ -3440,11 +3440,14 @@ void Player::SendInitialSpells()
 
     uint32 spellCount = 0;
 
-    WorldPacket data(SMSG_INITIAL_SPELLS/*, (1+2+4*m_spells.size()+m_spellCooldowns.size()*(2+2+2+4+4))*/);
+    WorldPacket data(SMSG_INITIAL_SPELLS);
 
     size_t countPos = data.bitwpos();
+    
     data.WriteBits(spellCount, 22);
-    data.WriteBit(0);
+    data.WriteBit(1);
+    
+    data.FlushBits();
 
     for (PlayerSpellMap::const_iterator itr = m_spells.begin(); itr != m_spells.end(); ++itr)
     {
@@ -3459,7 +3462,7 @@ void Player::SendInitialSpells()
         ++spellCount;
     }
    
-    data.PutBits<uint32>(countPos, spellCount, 22);          // write real count value
+   // data.PutBits<uint32>(countPos, spellCount, 22);          // write real count value
 
     //WorldPacket data(SMSG_PET_SPELLS/*, (1+2+4*m_spells.size()+m_spellCooldowns.size()*(2+2+2+4+4))*/);
 

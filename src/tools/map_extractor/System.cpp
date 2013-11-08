@@ -94,6 +94,7 @@ char const* CONF_mpq_list[]=
     "wow-update-base-17266.MPQ",
     "wow-update-base-17325.MPQ",
     "wow-update-base-17345.MPQ",
+	"wow-update-base-17538.MPQ",
     "world.MPQ",
     "misc.MPQ",
     "expansion1.MPQ",
@@ -102,9 +103,9 @@ char const* CONF_mpq_list[]=
     "expansion4.MPQ",
 };
 
-uint32 const Builds[] = {16016, 16048, 16057, 16309, 16357, 16516, 16650, 16844, 16965, 17116, 17266, 17325, 17345, 0};
+uint32 const Builds[] = {16016, 16048, 16057, 16309, 16357, 16516, 16650, 16844, 16965, 17116, 17266, 17325, 17345, 17538, 0};
 #define LAST_DBC_IN_DATA_BUILD 16016    // after this build mpqs with dbc are back to locale folder
-#define NEW_BASE_SET_BUILD  17345
+#define NEW_BASE_SET_BUILD  17538
 
 char const* Locales[] =
 {

@@ -1,4 +1,4 @@
---hard hack
+
 INSERT INTO `player_levelstats` VALUES ('24', '8', '1', '23', '20', '22', '20', '20');
 INSERT INTO `player_levelstats` VALUES ('24', '4', '1', '23', '20', '22', '20', '20');
 INSERT INTO `player_levelstats` VALUES ('24', '1', '1', '23', '20', '22', '20', '20');
