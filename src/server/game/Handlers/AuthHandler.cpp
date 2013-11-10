@@ -33,63 +33,59 @@ void WorldSession::SendAuthResponse(uint8 code, bool queued, uint32 queuePos)
     WorldPacket packet(SMSG_AUTH_RESPONSE, 80);
     packet.WriteBit(queued);
     packet.WriteBit(code == AUTH_OK);
+	
+    packet << uint8(code);                             // Auth response ?
 
     if (queued)
     {
-        packet.WriteBit(1);
-        //packet << uint32(queuePos);                             // Queue position
-
-        //packet.FlushBits();
+        packet.WriteBit(1);                             // Unknown
     }
 
     if (code == AUTH_OK)
     {
-	packet.WriteBit(0);
+        packet.WriteBit(0);
         packet.WriteBits(0, 21);
-	packet.WriteBits(0, 21);
+        packet.WriteBits(0, 21);
         packet.WriteBits(result->GetRowCount(), 23);
         packet.WriteBit(0);
         packet.WriteBit(0);
         packet.WriteBit(0);
-        packet.WriteBits(result2->GetRowCount(), 23);	
+        packet.WriteBits(result2->GetRowCount(), 23);
     }
-    TC_LOG_ERROR(LOG_FILTER_GENERAL, "Auth.");
+    TC_LOG_ERROR(LOG_FILTER_GENERAL, "SMSG_AUTH_RESPONSE");
     packet.FlushBits();
     
     if (code == AUTH_OK)
     {
+        packet << uint32(0);
+        packet << uint32(0);
+        packet << uint8(Expansion());
+
         do
         {
             Field* fields = result->Fetch();
 
-            packet << fields[0].GetUInt8();
             packet << fields[1].GetUInt8();
+            packet << fields[0].GetUInt8();
         } 
         while (result->NextRow());        
 
+        packet << uint8(Expansion());
         packet << uint32(0);
 
         do
         {
             Field* fields = result2->Fetch();
 
-            packet << fields[1].GetUInt8();
             packet << fields[0].GetUInt8();
+            packet << fields[1].GetUInt8();
         } 
         while (result2->NextRow());
 
 
-        packet << uint32(0);                                   // BillingTimeRemaining
-        packet << uint32(0);                                   // BillingTimeRested
-
-        packet << uint8(Expansion());                          // 0 - normal, 1 - TBC, 2 - WOTLK, 3 - CATA; must be set in database manually for each account
-        packet << uint8(Expansion());                          // Unknown, these two show the same
-
         packet << uint32(0);
         packet << uint32(0);
     }
-
-    packet << uint8(code);
 
     SendPacket(&packet);
 }

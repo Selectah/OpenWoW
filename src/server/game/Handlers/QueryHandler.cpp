@@ -242,45 +242,45 @@ void WorldSession::HandleCreatureQueryOpcode(WorldPacket& recvData)
         TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: CMSG_CREATURE_QUERY '%s' - Entry: %u.", ci->Name.c_str(), entry);
         
         data.WriteBit(1);                                    // has data
-        data.WriteBits(SubName.length() == 0 ? 0 : SubName.length() + 1, 11);
+        data.WriteBits(0, 11);
+        data.WriteBits(8, 22);                              // questitems
+        data.WriteBits(ci->IconName.length() + 1, 6);
         data.WriteBit(ci->RacialLeader);
-        
+
         for (int i = 0; i < 8; i++)
         {
-          if (i == 1)
+          if (i == 0)
               data.WriteBits(Name.length() + 1, 11);
           else
               data.WriteBits(0, 11);                          // name2, ..., name8
         }
-            
-        data.WriteBits(ci->IconName.length() + 1, 6);
-        data.WriteBits(0, 11);
-        data.WriteBits(8, 22);                              // questitems
+
+        data.WriteBit(1);
+        data.WriteBits(SubName.length() == 0 ? 0 : SubName.length() + 1, 11);
         
         data.FlushBits();
         
-        data << Name;                                       // Name
-        data << float(ci->ModHealth);                       // dmg/hp modifier
+        data << uint32(ci->family);                         // CreatureFamily.dbc
+        data << uint32(ci->expansion);                      // Expansion Required
+        data << uint32(ci->type);                           // CreatureType.dbc
         data << SubName;                                    // Subname
-        data << uint32(ci->rank);                           // Creature Rank (elite, boss, etc)
-        
+        data << uint32(ci->Modelid1);                       // Modelid1
+        data << uint32(ci->Modelid4);                       // Modelid4
+
         for (uint32 i = 0; i < MAX_CREATURE_QUEST_ITEMS; ++i)
             data << uint32(ci->questItems[i]);              // itemId[6], quest drop
-            
-        data << uint32(ci->type);                           // CreatureType.dbc
+
+        data << uint32(ci->type_flags2);                    // unknown meaning
+        data << ci->IconName;                               // "Directions" for guard, string for Icons 2.3.0
+        data << uint32(ci->type_flags);                     // flags
+        data << float(ci->ModHealth);                       // dmg/hp modifier
+        data << uint32(ci->rank);                           // Creature Rank (elite, boss, etc)
         data << uint32(ci->KillCredit[0]);                  // new in 3.1, kill credit
         data << uint32(ci->KillCredit[1]);                  // new in 3.1, kill credit
-        data << uint32(ci->family);                         // CreatureFamily.dbc
-        data << ci->IconName;                               // "Directions" for guard, string for Icons 2.3.0
-        data << uint32(ci->Modelid2);                       // Modelid2
-        data << uint32(ci->Modelid1);                       // Modelid1
-        data << uint32(ci->movementId);                     // CreatureMovementInfo.dbc
-        data << uint32(ci->Modelid4);                       // Modelid4
-        data << uint32(ci->type_flags);                     // flags
-        data << uint32(ci->type_flags2);                    // unknown meaning
-        data << uint32(ci->Modelid3);                       // Modelid3
         data << float(ci->ModMana);                         // dmg/mana modifier
-        data << uint32(ci->expansion);                      // Expansion Required
+        data << uint32(ci->movementId);                     // CreatureMovementInfo.dbc
+        data << uint32(ci->Modelid2);                       // Modelid2
+        data << uint32(ci->Modelid3);                       // Modelid3
         
         SendPacket(&data);
         TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: Sent SMSG_CREATURE_QUERY_RESPONSE");
