@@ -555,12 +555,21 @@ enum ItemSubclassGlyph
 
 #define MAX_ITEM_SUBCLASS_GLYPH                   12
 
-enum ItemSubclassBattlepet
+enum ItemSubclassBattlePet
 {
-    ITEM_SUBCLASS_BATTLEPET                     = 0
+    ITEM_SUBCLASS_BATTLE_PET_AQUATIC            = 1,
+    ITEM_SUBCLASS_BATTLE_PET_BEAST              = 2,
+    ITEM_SUBCLASS_BATTLE_PET_CRITTER            = 3,
+    ITEM_SUBCLASS_BATTLE_PET_DRAGONKIN          = 4,
+    ITEM_SUBCLASS_BATTLE_PET_ELEMENTAL          = 5,
+    ITEM_SUBCLASS_BATTLE_PET_FLYING             = 6,
+    ITEM_SUBCLASS_BATTLE_PET_HUMANOID           = 7,
+    ITEM_SUBCLASS_BATTLE_PET_MAGICAL            = 8,
+    ITEM_SUBCLASS_BATTLE_PET_MECHANICAL         = 9,
+    ITEM_SUBCLASS_BATTLE_PET_UNDEAD             = 10
 };
 
-#define MAX_ITEM_SUBCLASS_BATTLEPET               1
+#define MAX_ITEM_SUBCLASS_BATTLEPET               11
 
 const uint32 MaxItemSubclassValues[MAX_ITEM_CLASS] =
 {

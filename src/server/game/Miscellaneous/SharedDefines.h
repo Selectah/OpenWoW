@@ -4018,8 +4018,11 @@ enum BattlegroundTypeId
     BATTLEGROUND_RATED_25_VS_25 = 102, // Rated BG 25 vs 25
     BATTLEGROUND_TP             = 108, // Twin Peaks
     BATTLEGROUND_BG             = 120, // Battle For Gilneas
+    BATTLEGROUND_ICC            = 441, // 4.x icecrown citadel
+    BATTLEGROUND_RS             = 443, // 4.x ruby sanctum
+    BATTLEGROUND_REY            = 656, // 4.x rated eye of the storm
     BATTLEGROUND_TK             = 699, // Temple of Kotmogu
-    BATTLEGROUND_CF             = 706, // Capture the Flag 3?
+    BATTLEGROUND_CTF            = 706, // 5.x CTF3
     BATTLEGROUND_SM             = 708, // Silvershard Mines M727
     BATTLEGROUND_TA             = 719, // Tol'Viron Arena
     BATTLEGROUND_DG             = 754, // Deepwind Gorge M1105 Z6665
@@ -4072,7 +4075,7 @@ enum SpellFamilyNames
     SPELLFAMILY_SHAMAN      = 11,
     SPELLFAMILY_UNK2        = 12,                           // 2 spells (silence resistance)
     SPELLFAMILY_POTION      = 13,
-    // 14 - unused
+    SPELLFAMILY_MONK        = 14,
     SPELLFAMILY_DEATHKNIGHT = 15,
     // 16 - unused
     SPELLFAMILY_PET         = 17,
