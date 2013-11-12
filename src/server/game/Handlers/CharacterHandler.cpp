@@ -232,9 +232,8 @@ void WorldSession::HandleCharEnum(PreparedQueryResult result)
         charCount = uint32(result->GetRowCount());
         bitBuffer.reserve(24 * charCount / 8);
         dataBuffer.reserve(charCount * 381);
-
-         bitBuffer.WriteBits(charCount, 16);
-		
+		bitBuffer.WriteBits(charCount, 16);
+        	
         do
         {
             uint32 guidLow = (*result)[0].GetUInt32();
@@ -243,32 +242,37 @@ void WorldSession::HandleCharEnum(PreparedQueryResult result)
 
             Player::BuildEnumData(result, &dataBuffer, &bitBuffer);
 
+			
+
             // Do not allow banned characters to log in
             if (!(*result)[20].GetUInt32())
                 _legitCharacters.insert(guidLow);
 
             if (!sWorld->HasCharacterNameData(guidLow)) // This can happen if characters are inserted into the database manually. Core hasn't loaded name data yet.
                 sWorld->AddCharacterNameData(guidLow, (*result)[1].GetString(), (*result)[4].GetUInt8(), (*result)[2].GetUInt8(), (*result)[3].GetUInt8(), (*result)[7].GetUInt8());
-        } while (result->NextRow());
+        } while (result->NextRow()); 
 
-	   bitBuffer.WriteBit(charCount);  //
-	   bitBuffer.WriteBit(1);          //
-	   bitBuffer.WriteBit(0);          // This section is wrong but works for now.
-	   bitBuffer.WriteBit(21);         //
-
-       bitBuffer.FlushBits();
+		bitBuffer.WriteBit(1);
+		bitBuffer.WriteBits(0, 21);
+		bitBuffer.FlushBits();   
     }
     else
-		
+	{		
         bitBuffer.WriteBits(0, 16);
 		bitBuffer.WriteBit(1);
 	    bitBuffer.WriteBits(0, 21);
+		bitBuffer.FlushBits();
+	}
 
     WorldPacket data(SMSG_CHAR_ENUM, 7 + bitBuffer.size() + dataBuffer.size());
-    data.append(bitBuffer);
-    if (charCount)
-        data.append(dataBuffer);
 
+	data.append(bitBuffer);	
+    
+    if (charCount)
+	{		
+        data.append(dataBuffer);
+	}
+		
     SendPacket(&data);
 }
 
