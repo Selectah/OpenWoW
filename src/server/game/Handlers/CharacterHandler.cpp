@@ -242,8 +242,6 @@ void WorldSession::HandleCharEnum(PreparedQueryResult result)
 
             Player::BuildEnumData(result, &dataBuffer, &bitBuffer);
 
-			
-
             // Do not allow banned characters to log in
             if (!(*result)[20].GetUInt32())
                 _legitCharacters.insert(guidLow);
@@ -254,25 +252,25 @@ void WorldSession::HandleCharEnum(PreparedQueryResult result)
 
 		bitBuffer.WriteBit(1);
 		bitBuffer.WriteBits(0, 21);
-		bitBuffer.FlushBits();   
+		bitBuffer.FlushBits();
     }
     else
 	{		
-        bitBuffer.WriteBits(0, 16);
+		bitBuffer.WriteBits(0, 16);
 		bitBuffer.WriteBit(1);
-	    bitBuffer.WriteBits(0, 21);
+		bitBuffer.WriteBits(0, 21);
 		bitBuffer.FlushBits();
 	}
 
     WorldPacket data(SMSG_CHAR_ENUM, 7 + bitBuffer.size() + dataBuffer.size());
 
-	data.append(bitBuffer);	
+	data.append(bitBuffer);
     
     if (charCount)
-	{		
+	{
         data.append(dataBuffer);
 	}
-		
+
     SendPacket(&data);
 }
 
