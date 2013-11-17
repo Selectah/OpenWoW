@@ -240,7 +240,7 @@ void WorldSession::HandleCharEnum(PreparedQueryResult result)
 
             TC_LOG_INFO(LOG_FILTER_NETWORKIO, "Loading char guid %u from account %u.", guidLow, GetAccountId());
 
-            Player::BuildEnumData(result, &dataBuffer, &bitBuffer);
+            Player::BuildEnumData(result, &dataBuffer, &bitBuffer);		
 
             // Do not allow banned characters to log in
             if (!(*result)[20].GetUInt32())
@@ -252,25 +252,25 @@ void WorldSession::HandleCharEnum(PreparedQueryResult result)
 
 		bitBuffer.WriteBit(1);
 		bitBuffer.WriteBits(0, 21);
-		bitBuffer.FlushBits();
+		bitBuffer.FlushBits();   
     }
     else
 	{		
-		bitBuffer.WriteBits(0, 16);
+        bitBuffer.WriteBits(0, 16);
 		bitBuffer.WriteBit(1);
-		bitBuffer.WriteBits(0, 21);
+	    bitBuffer.WriteBits(0, 21);
 		bitBuffer.FlushBits();
 	}
 
     WorldPacket data(SMSG_CHAR_ENUM, 7 + bitBuffer.size() + dataBuffer.size());
 
-	data.append(bitBuffer);
+	data.append(bitBuffer);	
     
     if (charCount)
-	{
+	{		
         data.append(dataBuffer);
 	}
-
+		
     SendPacket(&data);
 }
 
@@ -726,30 +726,25 @@ void WorldSession::HandleCharCreateCallback(PreparedQueryResult result, Characte
 
 void WorldSession::HandleCharDeleteOpcode(WorldPacket& recvData)
 {
-    ObjectGuid guid;
-    
-    guid[5] = recvData.ReadBit();
-    guid[6] = recvData.ReadBit();
-
-   // uint8 unk = recvData.ReadBit();
-
-    guid[1] = recvData.ReadBit();
-    guid[0] = recvData.ReadBit();
+	ObjectGuid guid;
+	
     guid[3] = recvData.ReadBit();
     guid[4] = recvData.ReadBit();
     guid[2] = recvData.ReadBit();
-    guid[7] = recvData.ReadBit();
-
-    recvData.ReadByteSeq(guid[2]);
+	guid[5] = recvData.ReadBit();
+    guid[6] = recvData.ReadBit();
+    guid[1] = recvData.ReadBit();
+    guid[0] = recvData.ReadBit();
+    guid[7] = recvData.ReadBit();    
+	
+	recvData.ReadByteSeq(guid[2]);
     recvData.ReadByteSeq(guid[0]);
     recvData.ReadByteSeq(guid[4]);
     recvData.ReadByteSeq(guid[1]);
     recvData.ReadByteSeq(guid[5]);
     recvData.ReadByteSeq(guid[3]);
     recvData.ReadByteSeq(guid[7]);
-    recvData.ReadByteSeq(guid[6]);
-
-    TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "Character (Guid: %u) deleted", GUID_LOPART(guid));
+    recvData.ReadByteSeq(guid[6]);	
 
     // can't delete loaded character
     if (ObjectAccessor::FindPlayer(guid))
@@ -809,6 +804,9 @@ void WorldSession::HandleCharDeleteOpcode(WorldPacket& recvData)
 
     WorldPacket data(SMSG_CHAR_DELETE, 1);
     data << uint8(CHAR_DELETE_SUCCESS);
+
+	TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "Character (Guid: %u) deleted", GUID_LOPART(guid));
+
     SendPacket(&data);
 }
 
@@ -828,14 +826,14 @@ void WorldSession::HandlePlayerLoginOpcode(WorldPacket& recvData)
 
     recvData >> unk;
 
-    playerGuid[1] = recvData.ReadBit();
-    playerGuid[2] = recvData.ReadBit();
+	playerGuid[7] = recvData.ReadBit();
+    playerGuid[2] = recvData.ReadBit();   
     playerGuid[3] = recvData.ReadBit();
-    playerGuid[4] = recvData.ReadBit();
-    playerGuid[5] = recvData.ReadBit();
+	playerGuid[5] = recvData.ReadBit();
     playerGuid[6] = recvData.ReadBit();
-    playerGuid[7] = recvData.ReadBit();
-    playerGuid[0] = recvData.ReadBit();
+    playerGuid[4] = recvData.ReadBit();
+    playerGuid[1] = recvData.ReadBit();
+    playerGuid[0] = recvData.ReadBit();    
 
     recvData.ReadByteSeq(playerGuid[7]);
     recvData.ReadByteSeq(playerGuid[6]);
@@ -847,7 +845,7 @@ void WorldSession::HandlePlayerLoginOpcode(WorldPacket& recvData)
     recvData.ReadByteSeq(playerGuid[5]);
 
     //WorldObject* player = ObjectAccessor::GetWorldObject(*GetPlayer(), playerGuid);
-    TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "Character (Guid: %u) logging in", GUID_LOPART(playerGuid));
+    TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "Character (Guid: %u) logging in", GUID_LOPART(playerGuid));
 
     if (!IsLegitCharacterForAccount(GUID_LOPART(playerGuid)))
     {
@@ -945,12 +943,12 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
     // Send MOTD
     {
         data.Initialize(SMSG_MOTD, 50);                     // new in 2.0.1
-        data << (uint32)0;
+       /* data << (uint32)0;
 
         uint32 linecount=0;
         std::string str_motd = sWorld->GetMotd();
         std::string::size_type pos, nextpos;
-
+		
         pos = 0;
         while ((nextpos= str_motd.find('@', pos)) != std::string::npos)
         {
@@ -968,7 +966,7 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
             ++linecount;
         }
 
-        data.put(0, linecount);
+        data.put(0, linecount);*/
 
         SendPacket(&data);
         TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: Sent motd (SMSG_MOTD)");
@@ -1142,7 +1140,7 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
                    0,  /* Vrykul */                            0,  /* Tuskarr */
                    0,  /* Forest Troll */                      0,  /* Taunka */
                    0,  /* Northrend Skeleton */                0,  /* Ice Troll */
-               79596,  /* Worgen - Young Mastiff */           57239,  /* Pandaren - Wise Turtle*/
+               79596,  /* Worgen - Young Mastiff */        57239,  /* Pandaren - Wise Turtle*/
             };
 
             pCurrChar->CastSpell(pCurrChar, HunterCreatePetSpells[pCurrChar->getRace()], true);
